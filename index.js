@@ -1,3 +1,4 @@
+var debug = require('debug')('serandules:vehicle');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
