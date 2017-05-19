@@ -1,6 +1,6 @@
 {
-    "name": "vehicle",
-    "description": "vehicle",
+    "name": "model-vehicles",
+    "description": "model-vehicles",
     "version": "0.0.0",
     "author": {
         "name": "serandives",
@@ -8,10 +8,11 @@
     },
     "dependencies": {
         "mongoose": "4.*",
-        "logger": "serandules/logger#master"
+        "logger": "serandules/logger#master",
+        "validators": "serandules/validators#master"
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/serandules/vehicle.git"
+        "url": "git://github.com/serandules/model-vehicles.git"
     }
 }
