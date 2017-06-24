@@ -6,20 +6,22 @@ var types = require('validators').types;
 
 var vehicle = Schema({
     user: {
-        server: true,
         type: Schema.Types.ObjectId,
-        required: true,
         ref: 'users',
-        validator: types.ref()
+        validator: types.ref(),
+        server: true,
+        required: true,
+        index: true
     },
     has: {type: Object, default: {}},
     allowed: {type: Object, default: {}},
-    created: {type: Date, default: Date.now},
+    createdAt: {type: Date, default: Date.now, index: true},
     location: {
         type: Schema.Types.ObjectId,
         ref: 'locations',
+        validator: types.ref(),
         required: true,
-        validator: types.ref()
+        index: true
     },
     contacts: {
         type: Schema.Types.Mixed,
@@ -30,7 +32,6 @@ var vehicle = Schema({
     },
     type: {
         type: String,
-        required: true,
         validator: types.string({
             enum: [
                 'bicycle',
@@ -52,46 +53,54 @@ var vehicle = Schema({
                 'van',
                 'bus'
             ]
-        })
+        }),
+        required: true,
+        index: true
     },
     make: {
         type: Schema.Types.ObjectId,
         ref: 'vehicle-makes',
+        validator: types.ref(),
         required: true,
-        validator: types.ref()
+        index: true
     },
     model: {
         type: Schema.Types.ObjectId,
         ref: 'vehicle-models',
+        validator: types.ref(),
         required: true,
-        validator: types.ref()
+        index: true
     },
     manufacturedAt: {
         type: Date,
-        required: true,
         validator: types.date({
             max: Date.now
-        })
+        }),
+        required: true,
+        index: true
     },
     country: {
         type: Schema.Types.ObjectId,
         ref: 'countries',
+        validator: types.ref(),
         required: true,
-        validator: types.ref()
+        index: true
     },
     fuel: {
         type: String,
-        required: true,
         validator: types.string({
             enum: ['none', 'petrol', 'diesel', 'electric', 'hybrid']
-        })
+        }),
+        required: true,
+        index: true
     },
     transmission: {
         type: String,
-        required: true,
         validator: types.string({
             enum: ['none', 'manual', 'automatic', 'manumatic']
-        })
+        }),
+        required: true,
+        index: true
     },
     doors: {
         type: Number,
@@ -110,44 +119,50 @@ var vehicle = Schema({
     },
     seats: {
         type: Number,
-        required: true,
         validator: types.number({
             max: 1000,
             min: 0
-        })
+        }),
+        required: true,
+        index: true
     },
     driveType: {
         type: String,
-        required: true,
         validator: types.string({
             enum: ['front', 'rear', 'all']
-        })
+        }),
+        required: true,
+        index: true
     },
     mileage: {
         type: Number,
-        required: true,
         validator: types.number({
             min: 0
-        })
+        }),
+        required: true,
+        index: true
     },
     condition: {
         type: String,
-        required: true,
         validator: types.string({
             enum: ['brand-new', 'unregistered', 'used']
-        })
+        }),
+        required: true,
+        index: true
     },
     engine: {
         type: Number,
-        required: true,
         validator: types.number({
             max: 20000
-        })
+        }),
+        required: true,
+        index: true
     },
     color: {
         type: String,
+        validator: types.color(),
         required: true,
-        validator: types.color()
+        index: true
     },
     description: {
         type: String,
@@ -163,23 +178,41 @@ var vehicle = Schema({
     },
     price: {
         type: Number,
-        required: true,
         validator: types.number({
             min: 0
-        })
+        }),
+        required: true,
+        index: true
     },
     currency: {
         type: String,
-        required: true,
-        validator: types.currency()
+        validator: types.currency(),
+        required: true
     },
     centralLock: {
         type: Boolean,
-        validator: types.boolean()
+        validator: types.boolean(),
+        index: true
     },
     sunroof: {
         type: Boolean,
-        validator: types.boolean()
+        validator: types.boolean(),
+        index: true
+    },
+    powerShutters: {
+        type: Boolean,
+        validator: types.boolean(),
+        index: true
+    },
+    powerMirrors: {
+        type: Boolean,
+        validator: types.boolean(),
+        index: true
+    },
+    airConditioned: {
+        type: Boolean,
+        validator: types.boolean(),
+        index: true
     },
     spareWheels: {
         type: Boolean,
@@ -190,10 +223,6 @@ var vehicle = Schema({
         validator: types.boolean()
     },
     tinted: {
-        type: Boolean,
-        validator: types.boolean()
-    },
-    airConditioned: {
         type: Boolean,
         validator: types.boolean()
     },
@@ -213,14 +242,6 @@ var vehicle = Schema({
         type: Boolean,
         validator: types.boolean()
     },
-    powerShutters: {
-        type: Boolean,
-        validator: types.boolean()
-    },
-    powerMirrors: {
-        type: Boolean,
-        validator: types.boolean()
-    },
     seatBelts: {
         type: Boolean,
         validator: types.boolean()
@@ -230,6 +251,8 @@ var vehicle = Schema({
         validator: types.boolean()
     }
 });
+
+vehicle.index({description: 'text'});
 
 vehicle.set('toJSON', {
     getters: true,
