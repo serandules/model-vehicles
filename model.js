@@ -11,7 +11,8 @@ var vehicle = Schema({
         validator: types.ref(),
         server: true,
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     has: {type: Object, default: {}},
     allowed: {type: Object, default: {}},
@@ -55,21 +56,24 @@ var vehicle = Schema({
             ]
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     make: {
         type: Schema.Types.ObjectId,
         ref: 'vehicle-makes',
         validator: types.ref(),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     model: {
         type: Schema.Types.ObjectId,
         ref: 'vehicle-models',
         validator: types.ref(),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     manufacturedAt: {
         type: Date,
@@ -77,14 +81,16 @@ var vehicle = Schema({
             max: Date.now
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     country: {
         type: Schema.Types.ObjectId,
         ref: 'countries',
         validator: types.ref(),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     fuel: {
         type: String,
@@ -92,7 +98,8 @@ var vehicle = Schema({
             enum: ['none', 'petrol', 'diesel', 'electric', 'hybrid']
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     transmission: {
         type: String,
@@ -100,7 +107,8 @@ var vehicle = Schema({
             enum: ['none', 'manual', 'automatic', 'manumatic']
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     doors: {
         type: Number,
@@ -124,7 +132,8 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     driveType: {
         type: String,
@@ -132,7 +141,8 @@ var vehicle = Schema({
             enum: ['front', 'rear', 'all']
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     mileage: {
         type: Number,
@@ -140,7 +150,8 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     condition: {
         type: String,
@@ -148,7 +159,8 @@ var vehicle = Schema({
             enum: ['brand-new', 'unregistered', 'used']
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     engine: {
         type: Number,
@@ -156,19 +168,22 @@ var vehicle = Schema({
             max: 20000
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     color: {
         type: String,
         validator: types.color(),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     description: {
         type: String,
         validator: types.string({
             length: 1000
-        })
+        }),
+        searchable: true
     },
     photos: {
         type: [String],
@@ -182,7 +197,8 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true
+        index: true,
+        searchable: true
     },
     currency: {
         type: String,
@@ -192,27 +208,32 @@ var vehicle = Schema({
     centralLock: {
         type: Boolean,
         validator: types.boolean(),
-        index: true
+        index: true,
+        searchable: true
     },
     sunroof: {
         type: Boolean,
         validator: types.boolean(),
-        index: true
+        index: true,
+        searchable: true
     },
     powerShutters: {
         type: Boolean,
         validator: types.boolean(),
-        index: true
+        index: true,
+        searchable: true
     },
     powerMirrors: {
         type: Boolean,
         validator: types.boolean(),
-        index: true
+        index: true,
+        searchable: true
     },
     airConditioned: {
         type: Boolean,
         validator: types.boolean(),
-        index: true
+        index: true,
+        searchable: true
     },
     spareWheels: {
         type: Boolean,
