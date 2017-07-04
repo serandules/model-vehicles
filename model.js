@@ -1,5 +1,8 @@
 var log = require('logger')('model-vehicles');
 var mongoose = require('mongoose');
+
+var mongutils = require('mongutils');
+
 var Schema = mongoose.Schema;
 
 var types = require('validators').types;
@@ -16,7 +19,13 @@ var vehicle = Schema({
     },
     has: {type: Object, default: {}},
     allowed: {type: Object, default: {}},
-    createdAt: {type: Date, default: Date.now, index: true},
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        index: true,
+        searchable: true,
+        sortable: true
+    },
     location: {
         type: Schema.Types.ObjectId,
         ref: 'locations',
@@ -82,7 +91,8 @@ var vehicle = Schema({
         }),
         required: true,
         index: true,
-        searchable: true
+        searchable: true,
+        sortable: true
     },
     country: {
         type: Schema.Types.ObjectId,
@@ -151,7 +161,8 @@ var vehicle = Schema({
         }),
         required: true,
         index: true,
-        searchable: true
+        searchable: true,
+        sortable: true
     },
     condition: {
         type: String,
@@ -198,7 +209,8 @@ var vehicle = Schema({
         }),
         required: true,
         index: true,
-        searchable: true
+        searchable: true,
+        sortable: true
     },
     currency: {
         type: String,
@@ -272,6 +284,8 @@ var vehicle = Schema({
         validator: types.boolean()
     }
 });
+
+mongutils.ensureIndexes(vehicle);
 
 vehicle.index({description: 'text'});
 
