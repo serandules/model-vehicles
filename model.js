@@ -14,7 +14,6 @@ var vehicle = Schema({
         validator: types.ref(),
         server: true,
         required: true,
-        index: true,
         searchable: true
     },
     has: {type: Object, default: {}},
@@ -22,7 +21,6 @@ var vehicle = Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        index: true,
         searchable: true,
         sortable: true
     },
@@ -31,7 +29,6 @@ var vehicle = Schema({
         ref: 'locations',
         validator: types.ref(),
         required: true,
-        index: true
     },
     contacts: {
         type: Schema.Types.Mixed,
@@ -65,7 +62,6 @@ var vehicle = Schema({
             ]
         }),
         required: true,
-        index: true,
         searchable: true
     },
     make: {
@@ -73,7 +69,6 @@ var vehicle = Schema({
         ref: 'vehicle-makes',
         validator: types.ref(),
         required: true,
-        index: true,
         searchable: true
     },
     model: {
@@ -81,7 +76,6 @@ var vehicle = Schema({
         ref: 'vehicle-models',
         validator: types.ref(),
         required: true,
-        index: true,
         searchable: true
     },
     manufacturedAt: {
@@ -90,7 +84,6 @@ var vehicle = Schema({
             max: Date.now
         }),
         required: true,
-        index: true,
         searchable: true,
         sortable: true
     },
@@ -99,7 +92,6 @@ var vehicle = Schema({
         ref: 'countries',
         validator: types.ref(),
         required: true,
-        index: true,
         searchable: true
     },
     fuel: {
@@ -108,7 +100,6 @@ var vehicle = Schema({
             enum: ['none', 'petrol', 'diesel', 'electric', 'hybrid']
         }),
         required: true,
-        index: true,
         searchable: true
     },
     transmission: {
@@ -117,7 +108,6 @@ var vehicle = Schema({
             enum: ['none', 'manual', 'automatic', 'manumatic']
         }),
         required: true,
-        index: true,
         searchable: true
     },
     doors: {
@@ -142,7 +132,6 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true,
         searchable: true
     },
     driveType: {
@@ -151,7 +140,6 @@ var vehicle = Schema({
             enum: ['front', 'rear', 'all']
         }),
         required: true,
-        index: true,
         searchable: true
     },
     mileage: {
@@ -160,7 +148,6 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true,
         searchable: true,
         sortable: true
     },
@@ -170,7 +157,6 @@ var vehicle = Schema({
             enum: ['brand-new', 'unregistered', 'used']
         }),
         required: true,
-        index: true,
         searchable: true
     },
     engine: {
@@ -179,14 +165,12 @@ var vehicle = Schema({
             max: 20000
         }),
         required: true,
-        index: true,
         searchable: true
     },
     color: {
         type: String,
         validator: types.color(),
         required: true,
-        index: true,
         searchable: true
     },
     description: {
@@ -208,7 +192,6 @@ var vehicle = Schema({
             min: 0
         }),
         required: true,
-        index: true,
         searchable: true,
         sortable: true
     },
@@ -220,31 +203,26 @@ var vehicle = Schema({
     centralLock: {
         type: Boolean,
         validator: types.boolean(),
-        index: true,
         searchable: true
     },
     sunroof: {
         type: Boolean,
         validator: types.boolean(),
-        index: true,
         searchable: true
     },
     powerShutters: {
         type: Boolean,
         validator: types.boolean(),
-        index: true,
         searchable: true
     },
     powerMirrors: {
         type: Boolean,
         validator: types.boolean(),
-        index: true,
         searchable: true
     },
     airConditioned: {
         type: Boolean,
         validator: types.boolean(),
-        index: true,
         searchable: true
     },
     spareWheels: {
@@ -285,7 +263,14 @@ var vehicle = Schema({
     }
 });
 
-mongutils.ensureIndexes(vehicle);
+mongutils.ensureIndexes(vehicle, [
+    {price: 1, createdAt: 1, _id: 1},
+    {price: 1, createdAt: -1, _id: 1},
+    {price: 1, manufacturedAt: 1, _id: 1},
+    {price: 1, manufacturedAt: -1, _id: 1},
+    {price: 1, mileage: 1, _id: 1},
+    {price: 1, mileage: -1, _id: 1}
+]);
 
 vehicle.index({description: 'text'});
 
