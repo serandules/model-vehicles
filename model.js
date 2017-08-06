@@ -265,11 +265,15 @@ var vehicle = Schema({
 
 mongutils.ensureIndexes(vehicle, [
     {price: 1, createdAt: 1, _id: 1},
-    {price: 1, createdAt: -1, _id: 1},
-    {price: 1, manufacturedAt: 1, _id: 1},
-    {price: 1, manufacturedAt: -1, _id: 1},
-    {price: 1, mileage: 1, _id: 1},
-    {price: 1, mileage: -1, _id: 1}
+    {price: 1, createdAt: -1, _id: -1},
+    {price: 1, manufacturedAt: 1, createdAt: 1, _id: 1},
+    {price: 1, manufacturedAt: 1, createdAt: -1, _id: -1},
+    {price: 1, manufacturedAt: -1, createdAt: 1, _id: 1},
+    {price: 1, manufacturedAt: -1, createdAt: -1, _id: -1},
+    {price: 1, mileage: 1, createdAt: 1, _id: 1},
+    {price: 1, mileage: 1, createdAt: -1, _id: -1},
+    {price: 1, mileage: -1, createdAt: 1, _id: 1},
+    {price: 1, mileage: -1, createdAt: -1, _id: -1}
 ]);
 
 vehicle.index({description: 'text'});
