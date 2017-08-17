@@ -2,33 +2,19 @@ var log = require('logger')('model-vehicles');
 var mongoose = require('mongoose');
 
 var mongutils = require('mongutils');
+var mongins = require('mongins');
 
 var Schema = mongoose.Schema;
 
 var types = require('validators').types;
 
 var vehicle = Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
-        validator: types.ref(),
-        server: true,
-        required: true,
-        searchable: true
-    },
     has: {type: Object, default: {}},
-    allowed: {type: Object, default: {}},
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        searchable: true,
-        sortable: true
-    },
     location: {
         type: Schema.Types.ObjectId,
         ref: 'locations',
         validator: types.ref(),
-        required: true,
+        required: true
     },
     contacts: {
         type: Schema.Types.Mixed,
@@ -261,7 +247,12 @@ var vehicle = Schema({
         type: Boolean,
         validator: types.boolean()
     }
-});
+}, {collection: 'vehicles'});
+
+vehicle.plugin(mongins);
+vehicle.plugin(mongins.user);
+vehicle.plugin(mongins.createdAt);
+vehicle.plugin(mongins.updatedAt);
 
 mongutils.ensureIndexes(vehicle, [
     {price: 1, createdAt: 1, _id: 1},
