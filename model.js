@@ -269,17 +269,4 @@ mongutils.ensureIndexes(vehicle, [
 
 vehicle.index({description: 'text'});
 
-vehicle.set('toJSON', {
-    getters: true,
-    //virtuals: false,
-    transform: function (doc, ret, options) {
-        delete ret._id;
-        delete ret.__v;
-    }
-});
-
-vehicle.virtual('id').get(function () {
-    return this._id;
-});
-
 module.exports = mongoose.model('vehicles', vehicle);
