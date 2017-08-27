@@ -9,7 +9,6 @@ var Schema = mongoose.Schema;
 var types = require('validators').types;
 
 var vehicle = Schema({
-    has: {type: Object, default: {}},
     location: {
         type: Schema.Types.ObjectId,
         ref: 'locations',
