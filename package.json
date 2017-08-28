@@ -9,7 +9,8 @@
     "dependencies": {
         "mongoose": "4.*",
         "logger": "serandules/logger#master",
-        "validators": "serandules/validators#master"
+        "validators": "serandules/validators#master",
+        "mongins": "serandules/mongins#master"
     },
     "repository": {
         "type": "git",
