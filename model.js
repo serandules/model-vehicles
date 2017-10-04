@@ -72,13 +72,6 @@ var vehicle = Schema({
         searchable: true,
         sortable: true
     },
-    country: {
-        type: Schema.Types.ObjectId,
-        ref: 'countries',
-        validator: types.ref(),
-        required: true,
-        searchable: true
-    },
     fuel: {
         type: String,
         validator: types.string({
