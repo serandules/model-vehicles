@@ -10,6 +10,7 @@
         "mongoose": "4.*",
         "logger": "serandules/logger#master",
         "validators": "serandules/validators#master",
+        "model-locations": "serandules/model-locations#master",
         "mongins": "serandules/mongins#master"
     },
     "repository": {

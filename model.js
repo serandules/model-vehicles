@@ -6,6 +6,7 @@ var mongins = require('mongins');
 
 var Schema = mongoose.Schema;
 
+var Locations = require('model-locations');
 var types = require('validators').types;
 
 var vehicle = Schema({
@@ -245,6 +246,9 @@ vehicle.plugin(mongins);
 vehicle.plugin(mongins.user);
 vehicle.plugin(mongins.createdAt);
 vehicle.plugin(mongins.updatedAt);
+vehicle.plugin(mongins.tags({
+    location: Locations.tagger
+}));
 
 mongutils.ensureIndexes(vehicle, [
     {price: 1, createdAt: 1, _id: 1},
