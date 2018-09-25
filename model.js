@@ -244,8 +244,8 @@ var vehicle = Schema({
 
 vehicle.plugin(mongins);
 vehicle.plugin(mongins.user);
-vehicle.plugin(mongins.createdAt);
-vehicle.plugin(mongins.updatedAt);
+vehicle.plugin(mongins.createdAt());
+vehicle.plugin(mongins.updatedAt());
 vehicle.plugin(mongins.tags({
     location: Locations.tagger
 }));
