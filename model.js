@@ -159,10 +159,12 @@ var vehicle = Schema({
         }),
         searchable: true
     },
-    photos: {
-        type: [String],
-        validator: types.binaries({
-            max: 10
+    images: {
+        type: [Schema.Types.ObjectId],
+        ref: 'binaries',
+        validator: types.array({
+            max: 5,
+            validator: types.ref()
         })
     },
     price: {
