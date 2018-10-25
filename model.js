@@ -244,7 +244,7 @@ var vehicle = Schema({
     }
 }, {collection: 'vehicles'});
 
-vehicle.plugin(mongins);
+vehicle.plugin(mongins());
 vehicle.plugin(mongins.user);
 vehicle.plugin(mongins.createdAt());
 vehicle.plugin(mongins.updatedAt());
@@ -253,6 +253,7 @@ vehicle.plugin(mongins.tags({
 }));
 
 mongutils.ensureIndexes(vehicle, [
+    {images: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: -1, _id: -1},
     {price: 1, manufacturedAt: 1, createdAt: 1, _id: 1},
