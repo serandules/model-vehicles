@@ -1,13 +1,14 @@
 var log = require('logger')('model-vehicles');
 var mongoose = require('mongoose');
 
-var mongutils = require('mongutils');
-var mongins = require('mongins');
-
 var Schema = mongoose.Schema;
 
+var mongins = require('mongins');
 var Locations = require('model-locations');
-var types = require('validators').types;
+var validators = require('validators');
+var model = require('model');
+
+var types = validators.types;
 
 var vehicle = Schema({
     location: {
@@ -252,7 +253,7 @@ vehicle.plugin(mongins.tags({
     location: Locations.tagger
 }));
 
-mongutils.ensureIndexes(vehicle, [
+model.ensureIndexes(vehicle, [
     {images: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: -1, _id: -1},
