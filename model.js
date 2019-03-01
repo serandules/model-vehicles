@@ -149,7 +149,9 @@ var vehicle = Schema({
     },
     color: {
         type: String,
-        validator: types.color(),
+        validator: types.string({
+            enum: ['black', 'white', 'grey', 'red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink']
+        }),
         required: true,
         searchable: true
     },
@@ -179,7 +181,9 @@ var vehicle = Schema({
     },
     currency: {
         type: String,
-        validator: types.currency(),
+        validator: types.string({
+            enum: ['LKR']
+        }),
         required: true
     },
     centralLock: {
