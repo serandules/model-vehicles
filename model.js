@@ -17,12 +17,11 @@ var vehicle = Schema({
         validator: types.ref(),
         required: true
     },
-    contacts: {
-        type: Schema.Types.Mixed,
-        required: true,
-        validator: types.contacts({
-            max: 10
-        })
+    contact: {
+        type: Schema.Types.ObjectId,
+        ref: 'contacts',
+        validator: types.ref(),
+        required: true
     },
     type: {
         type: String,
