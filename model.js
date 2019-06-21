@@ -10,7 +10,7 @@ var model = require('model');
 
 var types = validators.types;
 
-var vehicle = Schema({
+var schema = Schema({
     location: {
         type: Schema.Types.ObjectId,
         ref: 'locations',
@@ -248,15 +248,24 @@ var vehicle = Schema({
     }
 }, {collection: 'vehicles'});
 
-vehicle.plugin(mongins());
-vehicle.plugin(mongins.user);
-vehicle.plugin(mongins.createdAt());
-vehicle.plugin(mongins.updatedAt());
-vehicle.plugin(mongins.tags({
+schema.plugin(mongins());
+schema.plugin(mongins.user);
+schema.plugin(mongins.permissions({
+    workflow: 'model'
+}));
+schema.plugin(mongins.status({
+    workflow: 'model'
+}));
+schema.plugin(mongins.visibility({
+    workflow: 'model'
+}));
+schema.plugin(mongins.createdAt());
+schema.plugin(mongins.updatedAt());
+schema.plugin(mongins.tags({
     location: Locations.tagger
 }));
 
-model.ensureIndexes(vehicle, [
+model.ensureIndexes(schema, [
     {images: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: 1, _id: 1},
     {price: 1, createdAt: -1, _id: -1},
@@ -270,6 +279,6 @@ model.ensureIndexes(vehicle, [
     {price: 1, mileage: -1, createdAt: -1, _id: -1}
 ]);
 
-vehicle.index({description: 'text'});
+schema.index({description: 'text'});
 
-module.exports = mongoose.model('vehicles', vehicle);
+module.exports = mongoose.model('vehicles', schema);
