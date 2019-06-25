@@ -149,7 +149,7 @@ var schema = Schema({
     color: {
         type: String,
         validator: types.string({
-            enum: ['black', 'white', 'grey', 'red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink']
+            enum: ['black', 'white', 'grey', 'silver', 'red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'yellow']
         }),
         required: true,
         searchable: true
