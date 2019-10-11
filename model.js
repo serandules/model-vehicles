@@ -158,8 +158,7 @@ var schema = Schema({
         type: String,
         validator: types.string({
             length: 1000
-        }),
-        searchable: true
+        })
     },
     images: {
         type: [Schema.Types.ObjectId],
