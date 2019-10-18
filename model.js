@@ -31,6 +31,8 @@ var schema = Schema({
                 'excavator',
                 'loader',
                 'bulldozer',
+                'digger',
+                'tractor',
                 'truck',
                 'cement-mixer',
                 'crane',
