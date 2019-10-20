@@ -9,6 +9,7 @@ var validators = require('validators');
 var model = require('model');
 
 var types = validators.types;
+var requires = validators.requires;
 
 var schema = Schema({
     location: {
@@ -46,7 +47,8 @@ var schema = Schema({
                 'cab',
                 'lorry',
                 'van',
-                'bus'
+                'bus',
+                'other'
             ]
         }),
         required: true,
@@ -66,6 +68,13 @@ var schema = Schema({
         required: true,
         searchable: true
     },
+    edition: {
+        type: String,
+        validator: types.string({
+            length: 50
+        }),
+        searchable: true
+    },
     manufacturedAt: {
         type: Date,
         validator: types.date({
@@ -78,7 +87,7 @@ var schema = Schema({
     fuel: {
         type: String,
         validator: types.string({
-            enum: ['none', 'petrol', 'diesel', 'electric', 'hybrid']
+            enum: ['none', 'petrol', 'diesel', 'electric', 'hybrid', 'other']
         }),
         required: true,
         searchable: true
@@ -86,41 +95,25 @@ var schema = Schema({
     transmission: {
         type: String,
         validator: types.string({
-            enum: ['none', 'manual', 'automatic', 'manumatic']
+            enum: ['manual', 'automatic', 'manumatic', 'other']
         }),
         required: true,
         searchable: true
     },
-    doors: {
-        type: Number,
-        required: true,
-        validator: types.number({
-            max: 50,
-            min: 0
-        })
-    },
-    steering: {
-        type: String,
-        required: true,
-        validator: types.string({
-            enum: ['left', 'right']
-        })
-    },
-    seats: {
+    engine: {
         type: Number,
         validator: types.number({
-            max: 1000,
-            min: 0
+            max: 20000
         }),
-        required: true,
+        require: requires.engine(),
         searchable: true
     },
     driveType: {
         type: String,
         validator: types.string({
-            enum: ['front', 'rear', 'all']
+            enum: ['front', 'rear', 'four', 'all', 'other']
         }),
-        required: true,
+        require: requires.driveType(),
         searchable: true
     },
     mileage: {
@@ -140,35 +133,13 @@ var schema = Schema({
         required: true,
         searchable: true
     },
-    engine: {
-        type: Number,
-        validator: types.number({
-            max: 20000
-        }),
-        required: true,
-        searchable: true
-    },
     color: {
         type: String,
         validator: types.string({
-            enum: ['black', 'white', 'grey', 'silver', 'red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'yellow']
+            enum: ['black', 'white', 'grey', 'silver', 'red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'yellow', 'other']
         }),
         required: true,
         searchable: true
-    },
-    description: {
-        type: String,
-        validator: types.string({
-            length: 1000
-        })
-    },
-    images: {
-        type: [Schema.Types.ObjectId],
-        ref: 'binaries',
-        validator: types.array({
-            max: 5,
-            validator: types.ref()
-        })
     },
     price: {
         type: Number,
@@ -185,6 +156,41 @@ var schema = Schema({
             enum: ['LKR']
         }),
         required: true
+    },
+    description: {
+        type: String,
+        validator: types.string({
+            length: 1000
+        })
+    },
+    images: {
+        type: [Schema.Types.ObjectId],
+        ref: 'binaries',
+        validator: types.array({
+            max: 5,
+            validator: types.ref()
+        })
+    },
+    doors: {
+        type: Number,
+        validator: types.number({
+            max: 50,
+            min: 0
+        })
+    },
+    steering: {
+        type: String,
+        validator: types.string({
+            enum: ['left', 'right']
+        })
+    },
+    seats: {
+        type: Number,
+        validator: types.number({
+            max: 1000,
+            min: 0
+        }),
+        searchable: true
     },
     centralLock: {
         type: Boolean,
