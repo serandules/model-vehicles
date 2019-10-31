@@ -72,8 +72,7 @@ var schema = Schema({
         type: String,
         validator: types.string({
             length: 50
-        }),
-        searchable: true
+        })
     },
     manufacturedAt: {
         type: Date,
@@ -105,8 +104,7 @@ var schema = Schema({
         validator: types.number({
             max: 20000
         }),
-        require: requires.engine(),
-        searchable: true
+        require: requires.engine()
     },
     driveType: {
         type: String,
@@ -189,33 +187,27 @@ var schema = Schema({
         validator: types.number({
             max: 1000,
             min: 0
-        }),
-        searchable: true
+        })
     },
     centralLock: {
         type: Boolean,
-        validator: types.boolean(),
-        searchable: true
+        validator: types.boolean()
     },
     sunroof: {
         type: Boolean,
-        validator: types.boolean(),
-        searchable: true
+        validator: types.boolean()
     },
     powerShutters: {
         type: Boolean,
-        validator: types.boolean(),
-        searchable: true
+        validator: types.boolean()
     },
     powerMirrors: {
         type: Boolean,
-        validator: types.boolean(),
-        searchable: true
+        validator: types.boolean()
     },
     airConditioned: {
         type: Boolean,
-        validator: types.boolean(),
-        searchable: true
+        validator: types.boolean()
     },
     spareWheels: {
         type: Boolean,
