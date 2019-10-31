@@ -268,22 +268,23 @@ schema.plugin(mongins.visibility({
 }));
 schema.plugin(mongins.createdAt());
 schema.plugin(mongins.updatedAt());
+schema.plugin(mongins.modifiedAt());
 schema.plugin(mongins.tags({
     location: Locations.tagger
 }));
 
 model.ensureIndexes(schema, [
-    {images: 1, createdAt: 1, _id: 1},
-    {price: 1, createdAt: 1, _id: 1},
-    {price: 1, createdAt: -1, _id: -1},
-    {price: 1, manufacturedAt: 1, createdAt: 1, _id: 1},
-    {price: 1, manufacturedAt: 1, createdAt: -1, _id: -1},
-    {price: 1, manufacturedAt: -1, createdAt: 1, _id: 1},
-    {price: 1, manufacturedAt: -1, createdAt: -1, _id: -1},
-    {price: 1, mileage: 1, createdAt: 1, _id: 1},
-    {price: 1, mileage: 1, createdAt: -1, _id: -1},
-    {price: 1, mileage: -1, createdAt: 1, _id: 1},
-    {price: 1, mileage: -1, createdAt: -1, _id: -1}
+    {images: 1, updatedAt: 1, _id: 1},
+    {price: 1, updatedAt: 1, _id: 1},
+    {price: 1, updatedAt: -1, _id: -1},
+    {price: 1, manufacturedAt: 1, updatedAt: 1, _id: 1},
+    {price: 1, manufacturedAt: 1, updatedAt: -1, _id: -1},
+    {price: 1, manufacturedAt: -1, updatedAt: 1, _id: 1},
+    {price: 1, manufacturedAt: -1, updatedAt: -1, _id: -1},
+    {price: 1, mileage: 1, updatedAt: 1, _id: 1},
+    {price: 1, mileage: 1, updatedAt: -1, _id: -1},
+    {price: 1, mileage: -1, updatedAt: 1, _id: 1},
+    {price: 1, mileage: -1, updatedAt: -1, _id: -1}
 ]);
 
 schema.index({description: 'text'});
