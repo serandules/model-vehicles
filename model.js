@@ -158,7 +158,7 @@ var schema = Schema({
     description: {
         type: String,
         validator: types.string({
-            length: 1000
+            length: 5000
         })
     },
     images: {
