@@ -279,6 +279,4 @@ model.ensureIndexes(schema, [
     {price: 1, mileage: -1, updatedAt: -1, _id: -1}
 ]);
 
-schema.index({description: 'text'});
-
 module.exports = mongoose.model('vehicles', schema);
