@@ -24,6 +24,12 @@ var schema = Schema({
         validator: types.ref(),
         required: true
     },
+    title: {
+        type: String,
+        validator: types.string({
+            length: 100
+        })
+    },
     type: {
         type: String,
         validator: types.string({
